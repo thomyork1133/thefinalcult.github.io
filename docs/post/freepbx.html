@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="https://www.cnblogs.com/shixiaomin/p/10855473.html
+
+Fusionpbx 安装在debian 12下
+安装说明
+[Quick Install — FusionPBX Docs documentation](https://docs.fusionpbx.com/en/latest/getting_started/quick_install.html)
+
+Freepbx
+
+voice文件夹有文档
+
+修改端口5060
+
+2,asterisk setting port 
+3,phone setting
+以上已完成修改，下面配置测试不生效
+
+/etc/asterisk/sip.conf 
+bindport=5060
+netstat -ntulp | grep 5060
+netstat -apn | grep asterisk
+cd /etc/asterisk
+nano sip_general_custom.conf
+add the following to the file:
+bindport=5060
+
+
+IVR
+下载原有IVR，chorme -F12-network-点击播放原有录音-在network处copy连接，复制连接到浏览器，下载
+1，创建语音提示
+admin-systemrecording-add ivr -上传或者制作-submit-applychange
+
+
+配置FreePBX的IVR（Interactive Voice Response，交互式语音应答）系统可以有效地管理来电并引导呼叫者到正确的部门或分机。">
+<meta property="og:title" content="freepbx">
+<meta property="og:description" content="https://www.cnblogs.com/shixiaomin/p/10855473.html
+
+Fusionpbx 安装在debian 12下
+安装说明
+[Quick Install — FusionPBX Docs documentation](https://docs.fusionpbx.com/en/latest/getting_started/quick_install.html)
+
+Freepbx
+
+voice文件夹有文档
+
+修改端口5060
+
+2,asterisk setting port 
+3,phone setting
+以上已完成修改，下面配置测试不生效
+
+/etc/asterisk/sip.conf 
+bindport=5060
+netstat -ntulp | grep 5060
+netstat -apn | grep asterisk
+cd /etc/asterisk
+nano sip_general_custom.conf
+add the following to the file:
+bindport=5060
+
+
+IVR
+下载原有IVR，chorme -F12-network-点击播放原有录音-在network处copy连接，复制连接到浏览器，下载
+1，创建语音提示
+admin-systemrecording-add ivr -上传或者制作-submit-applychange
+
+
+配置FreePBX的IVR（Interactive Voice Response，交互式语音应答）系统可以有效地管理来电并引导呼叫者到正确的部门或分机。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://thomyork1133.github.io/thefinalcult.github.io/post/freepbx.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>freepbx</title>
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">freepbx</h1>
+<div class="title-right">
+    <a href="https://thomyork1133.github.io/thefinalcult.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/thomyork1133/thefinalcult.github.io/issues/2" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p><a href="https://www.cnblogs.com/shixiaomin/p/10855473.html" rel="nofollow">https://www.cnblogs.com/shixiaomin/p/10855473.html</a></p>
+<p>Fusionpbx 安装在debian 12下<br>
+安装说明<br>
+<a href="https://docs.fusionpbx.com/en/latest/getting_started/quick_install.html" rel="nofollow">Quick Install — FusionPBX Docs documentation</a></p>
+<p>Freepbx</p>
+<p>voice文件夹有文档</p>
+<p>修改端口5060</p>
+<p>2,asterisk setting port<br>
+3,phone setting<br>
+以上已完成修改，下面配置测试不生效</p>
+<p>/etc/asterisk/sip.conf<br>
+bindport=5060<br>
+netstat -ntulp | grep 5060<br>
+netstat -apn | grep asterisk<br>
+cd /etc/asterisk<br>
+nano sip_general_custom.conf<br>
+add the following to the file:<br>
+bindport=5060</p>
+<p>IVR<br>
+下载原有IVR，chorme -F12-network-点击播放原有录音-在network处copy连接，复制连接到浏览器，下载<br>
+1，创建语音提示<br>
+admin-systemrecording-add ivr -上传或者制作-submit-applychange</p>
+<p>配置FreePBX的IVR（Interactive Voice Response，交互式语音应答）系统可以有效地管理来电并引导呼叫者到正确的部门或分机。以下是配置FreePBX IVR的详细步骤：<br>
+步骤 1: 创建语音提示（IVR语音）<br>
+录制或上传语音提示:<br>
+录制：可以使用FreePBX自带的录音功能来录制IVR语音提示。进入Admin -&gt; System Recordings，选择Add Recording，按提示进行录音。<br>
+上传：如果已有预录的音频文件，可以直接上传。文件格式通常为.wav或.mp3。<br>
+步骤 2: 创建IVR菜单<br>
+进入IVR模块:<br>
+在FreePBX界面中，导航到Applications -&gt; IVR。<br>
+点击Add IVR来创建一个新的IVR菜单。<br>
+配置IVR基本设置:<br>
+IVR Name: 为你的IVR命名，比如Main Menu。<br>
+Announcement: 选择之前录制或上传的语音提示。<br>
+Timeout: 设置等待用户输入的时间。<br>
+Direct Dial: 允许呼叫者直接拨打分机号码（可选）。<br>
+设置IVR选项:<br>
+在IVR Entries部分，定义每个数字键的操作。例如：<br>
+按1转接到销售部门。<br>
+按2转接到技术支持。<br>
+按0转接到接待员。<br>
+添加相应的操作，选择目的地（Destination），如特定分机、呼叫组或另一个IVR菜单。<br>
+步骤 3: 将IVR集成到来电路由<br>
+设置来电路由:<br>
+进入Connectivity -&gt; Inbound Routes。<br>
+选择或创建一个新的来电路由。<br>
+在Set Destination部分，选择刚创建的IVR菜单作为目标。<br>
+步骤 4: 测试和优化IVR<br>
+测试IVR功能:<br>
+从外部电话拨打进入线路，测试IVR的各个选项是否能正常工作。<br>
+优化IVR设置:<br>
+根据测试结果和用户反馈，调整语音提示内容、选项设置和超时设置等。<br>
+示例配置<br>
+假设你录制了一个欢迎语音提示，内容如下：<br>
+欢迎致电XYZ公司。请按1进入销售，按2进入技术支持，按0进入接待员。<br>
+你的IVR配置可能如下：<br>
+IVR Name: Main Menu<br>
+Announcement: welcome_prompt.wav<br>
+Timeout: 5秒<br>
+IVR Entries:<br>
+按1 -&gt; 转接到Sales Queue<br>
+按2 -&gt; 转接到Support Queue<br>
+按0 -&gt; 转接到Reception</p>
+<p>设置队列</p>
+<p>在FreePBX中配置堆叠（queues）可以帮助管理来电并确保呼叫者被有序地接待。下面是一个详细的步骤指南，介绍如何在FreePBX中配置呼叫队列：<br>
+步骤 1: 创建一个新的呼叫队列<br>
+进入Queue模块:<br>
+在FreePBX界面中，导航到 Applications -&gt; Queues。<br>
+点击 Add Queue 来创建一个新的呼叫队列。<br>
+配置基本设置:<br>
+Queue Number: 输入一个唯一的队列号码，例如 600.<br>
+Queue Name: 为队列命名，例如 SupportQueue。<br>
+Password: 设置一个密码（可选），用于限制加入队列的访问。<br>
+设置呼叫策略:<br>
+Ring Strategy: 选择一种振铃策略。例如，ringall表示所有座席同时振铃，leastrecent表示振铃给上次最少接听的座席，roundrobin表示轮流振铃。<br>
+Agent Timeout: 设置座席的振铃时间（例如，15秒）。<br>
+设置队列行为:<br>
+Max Wait Time: 设置呼叫者在队列中等待的最大时间（例如，300秒）。<br>
+Max Callers: 设置队列中允许的最大呼叫者数量。<br>
+Join Empty: 定义是否允许呼叫者加入没有座席的队列。<br>
+Leave When Empty: 定义如果没有座席时，呼叫者是否离开队列。<br>
+配置音频提示:<br>
+Queue Announcements: 选择或上传音频文件，提供给在队列中等待的呼叫者。<br>
+Music on Hold: 选择等待时播放的音乐列表。<br>
+步骤 2: 添加座席到队列<br>
+静态座席:<br>
+在 Static Agents 部分，输入座席的分机号码。例如，输入 1001,0 表示座席分机为1001，优先级为0。<br>
+动态座席:<br>
+座席可以通过拨打特定的代码加入队列。例如，座席可以拨打 *45 加入队列或使用其他预设的动态加入代码。<br>
+步骤 3: 设置来电路由到队列<br>
+进入来电路由模块:<br>
+导航到 Connectivity -&gt; Inbound Routes。<br>
+选择或创建一个新的来电路由。<br>
+设置目的地:<br>
+在 Set Destination 部分，选择 Queues，然后选择之前创建的队列，例如 600 - SupportQueue。<br>
+步骤 4: 测试和优化<br>
+测试呼叫队列:<br>
+从外部电话拨打进入线路，测试呼叫是否能正确进入队列，并测试各个座席的振铃策略。<br>
+优化配置:<br>
+根据实际需求和反馈，调整呼叫策略、座席配置和等待提示音等设置，以提高客户服务的效率和体验。<br>
+参考文档和资源<br>
+FreePBX官方文档<br>
+Queue Configuration Guide<br>
+通过这些步骤，你可以在FreePBX中成功配置呼叫队列系统，帮助管理和分配来电，提高整体客户服务的效率和满意度。<br>
+freepbx配置队列<br>
+ChatGPT<br>
+配置FreePBX的队列（queues）可以帮助管理来电，并确保呼叫者被有序地接待。以下是配置FreePBX呼叫队列的详细步骤：<br>
+步骤 1: 创建一个新的呼叫队列<br>
+进入Queue模块:<br>
+在FreePBX界面中，导航到 Applications -&gt; Queues。<br>
+点击 Add Queue 来创建一个新的呼叫队列。<br>
+配置基本设置:<br>
+Queue Number: 输入一个唯一的队列号码，例如 600。<br>
+Queue Name: 为队列命名，例如 SupportQueue。<br>
+Password: 设置一个密码（可选），用于限制加入队列的访问。<br>
+设置呼叫策略:<br>
+Ring Strategy: 选择一种振铃策略。例如，ringall（所有座席同时振铃），leastrecent（振铃给上次最少接听的座席），roundrobin（轮流振铃）。<br>
+Agent Timeout: 设置座席的振铃时间（例如，15秒）。<br>
+设置队列行为:<br>
+Max Wait Time: 设置呼叫者在队列中等待的最大时间（例如，300秒）。<br>
+Max Callers: 设置队列中允许的最大呼叫者数量。<br>
+Join Empty: 定义是否允许呼叫者加入没有座席的队列。<br>
+Leave When Empty: 定义如果没有座席时，呼叫者是否离开队列。<br>
+配置音频提示:<br>
+Queue Announcements: 选择或上传音频文件，提供给在队列中等待的呼叫者。<br>
+Music on Hold: 选择等待时播放的音乐列表。<br>
+步骤 2: 添加座席到队列<br>
+静态座席:<br>
+在 Static Agents 部分，输入座席的分机号码。例如，输入 1001,0 表示座席分机为1001，优先级为0。<br>
+动态座席:<br>
+座席可以通过拨打特定的代码加入队列。例如，座席可以拨打 *45 加入队列或使用其他预设的动态加入代码。<br>
+步骤 3: 设置来电路由到队列<br>
+进入来电路由模块:<br>
+导航到 Connectivity -&gt; Inbound Routes。<br>
+选择或创建一个新的来电路由。<br>
+设置目的地:<br>
+在 Set Destination 部分，选择 Queues，然后选择之前创建的队列，例如 600 - SupportQueue。<br>
+步骤 4: 测试和优化<br>
+测试呼叫队列:<br>
+从外部电话拨打进入线路，测试呼叫是否能正确进入队列，并测试各个座席的振铃策略。<br>
+优化配置:<br>
+根据实际需求和反馈，调整呼叫策略、座席配置和等待提示音等设置，以提高客户服务的效率和体验。<br>
+重置Polycom电话密码<br>
+开机按住cancel知道出现7秒倒计时同时按住1,3,5<br>
+然后用mac地址作为密码，正确输入方式<br>
+输入设备的 MAC ID 作为密码 （例如 0004f28619dc）。<br>
+按与模式或（编码）相对应的第二个软键将其更改为 A-&gt;abc 或 a-&gt;abc。<br>
+然后（例如）要选择字母 F， 请按 3 键三次。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+</div>
+    <div id="footer">Copyright © <span id="year"></span><a href="https://thomyork1133.github.io/thefinalcult.github.io"> thefinalcult </a>
+<p>
+<span id="runday"></span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a>
+</p>
+
+<script>
+if(""!=""){
+    var now=new Date();
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("year").innerHTML=now.getFullYear();
+    if(""!=""){document.getElementById("runday").innerHTML=" • "+"网站运行"+diffDay+"天"+" • ";}
+    else{document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";}
+}
+</script>
+</div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","thomyork1133/thefinalcult.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+
+
+</html>

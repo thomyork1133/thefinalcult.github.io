@@ -1,0 +1,162 @@
+https://www.cnblogs.com/shixiaomin/p/10855473.html
+
+Fusionpbx 安装在debian 12下
+安装说明
+[Quick Install — FusionPBX Docs documentation](https://docs.fusionpbx.com/en/latest/getting_started/quick_install.html)
+
+Freepbx
+
+voice文件夹有文档
+
+修改端口5060
+
+2,asterisk setting port 
+3,phone setting
+以上已完成修改，下面配置测试不生效
+
+/etc/asterisk/sip.conf 
+bindport=5060
+netstat -ntulp | grep 5060
+netstat -apn | grep asterisk
+cd /etc/asterisk
+nano sip_general_custom.conf
+add the following to the file:
+bindport=5060
+
+
+IVR
+下载原有IVR，chorme -F12-network-点击播放原有录音-在network处copy连接，复制连接到浏览器，下载
+1，创建语音提示
+admin-systemrecording-add ivr -上传或者制作-submit-applychange
+
+
+配置FreePBX的IVR（Interactive Voice Response，交互式语音应答）系统可以有效地管理来电并引导呼叫者到正确的部门或分机。以下是配置FreePBX IVR的详细步骤：
+步骤 1: 创建语音提示（IVR语音）
+录制或上传语音提示:
+录制：可以使用FreePBX自带的录音功能来录制IVR语音提示。进入Admin -> System Recordings，选择Add Recording，按提示进行录音。
+上传：如果已有预录的音频文件，可以直接上传。文件格式通常为.wav或.mp3。
+步骤 2: 创建IVR菜单
+进入IVR模块:
+在FreePBX界面中，导航到Applications -> IVR。
+点击Add IVR来创建一个新的IVR菜单。
+配置IVR基本设置:
+IVR Name: 为你的IVR命名，比如Main Menu。
+Announcement: 选择之前录制或上传的语音提示。
+Timeout: 设置等待用户输入的时间。
+Direct Dial: 允许呼叫者直接拨打分机号码（可选）。
+设置IVR选项:
+在IVR Entries部分，定义每个数字键的操作。例如：
+按1转接到销售部门。
+按2转接到技术支持。
+按0转接到接待员。
+添加相应的操作，选择目的地（Destination），如特定分机、呼叫组或另一个IVR菜单。
+步骤 3: 将IVR集成到来电路由
+设置来电路由:
+进入Connectivity -> Inbound Routes。
+选择或创建一个新的来电路由。
+在Set Destination部分，选择刚创建的IVR菜单作为目标。
+步骤 4: 测试和优化IVR
+测试IVR功能:
+从外部电话拨打进入线路，测试IVR的各个选项是否能正常工作。
+优化IVR设置:
+根据测试结果和用户反馈，调整语音提示内容、选项设置和超时设置等。
+示例配置
+假设你录制了一个欢迎语音提示，内容如下：
+欢迎致电XYZ公司。请按1进入销售，按2进入技术支持，按0进入接待员。
+你的IVR配置可能如下：
+IVR Name: Main Menu
+Announcement: welcome_prompt.wav
+Timeout: 5秒
+IVR Entries:
+按1 -> 转接到Sales Queue
+按2 -> 转接到Support Queue
+按0 -> 转接到Reception
+
+
+设置队列
+
+
+在FreePBX中配置堆叠（queues）可以帮助管理来电并确保呼叫者被有序地接待。下面是一个详细的步骤指南，介绍如何在FreePBX中配置呼叫队列：
+步骤 1: 创建一个新的呼叫队列
+进入Queue模块:
+在FreePBX界面中，导航到 Applications -> Queues。
+点击 Add Queue 来创建一个新的呼叫队列。
+配置基本设置:
+Queue Number: 输入一个唯一的队列号码，例如 600.
+Queue Name: 为队列命名，例如 SupportQueue。
+Password: 设置一个密码（可选），用于限制加入队列的访问。
+设置呼叫策略:
+Ring Strategy: 选择一种振铃策略。例如，ringall表示所有座席同时振铃，leastrecent表示振铃给上次最少接听的座席，roundrobin表示轮流振铃。
+Agent Timeout: 设置座席的振铃时间（例如，15秒）。
+设置队列行为:
+Max Wait Time: 设置呼叫者在队列中等待的最大时间（例如，300秒）。
+Max Callers: 设置队列中允许的最大呼叫者数量。
+Join Empty: 定义是否允许呼叫者加入没有座席的队列。
+Leave When Empty: 定义如果没有座席时，呼叫者是否离开队列。
+配置音频提示:
+Queue Announcements: 选择或上传音频文件，提供给在队列中等待的呼叫者。
+Music on Hold: 选择等待时播放的音乐列表。
+步骤 2: 添加座席到队列
+静态座席:
+在 Static Agents 部分，输入座席的分机号码。例如，输入 1001,0 表示座席分机为1001，优先级为0。
+动态座席:
+座席可以通过拨打特定的代码加入队列。例如，座席可以拨打 *45 加入队列或使用其他预设的动态加入代码。
+步骤 3: 设置来电路由到队列
+进入来电路由模块:
+导航到 Connectivity -> Inbound Routes。
+选择或创建一个新的来电路由。
+设置目的地:
+在 Set Destination 部分，选择 Queues，然后选择之前创建的队列，例如 600 - SupportQueue。
+步骤 4: 测试和优化
+测试呼叫队列:
+从外部电话拨打进入线路，测试呼叫是否能正确进入队列，并测试各个座席的振铃策略。
+优化配置:
+根据实际需求和反馈，调整呼叫策略、座席配置和等待提示音等设置，以提高客户服务的效率和体验。
+参考文档和资源
+FreePBX官方文档
+Queue Configuration Guide
+通过这些步骤，你可以在FreePBX中成功配置呼叫队列系统，帮助管理和分配来电，提高整体客户服务的效率和满意度。
+freepbx配置队列
+ChatGPT
+配置FreePBX的队列（queues）可以帮助管理来电，并确保呼叫者被有序地接待。以下是配置FreePBX呼叫队列的详细步骤：
+步骤 1: 创建一个新的呼叫队列
+进入Queue模块:
+在FreePBX界面中，导航到 Applications -> Queues。
+点击 Add Queue 来创建一个新的呼叫队列。
+配置基本设置:
+Queue Number: 输入一个唯一的队列号码，例如 600。
+Queue Name: 为队列命名，例如 SupportQueue。
+Password: 设置一个密码（可选），用于限制加入队列的访问。
+设置呼叫策略:
+Ring Strategy: 选择一种振铃策略。例如，ringall（所有座席同时振铃），leastrecent（振铃给上次最少接听的座席），roundrobin（轮流振铃）。
+Agent Timeout: 设置座席的振铃时间（例如，15秒）。
+设置队列行为:
+Max Wait Time: 设置呼叫者在队列中等待的最大时间（例如，300秒）。
+Max Callers: 设置队列中允许的最大呼叫者数量。
+Join Empty: 定义是否允许呼叫者加入没有座席的队列。
+Leave When Empty: 定义如果没有座席时，呼叫者是否离开队列。
+配置音频提示:
+Queue Announcements: 选择或上传音频文件，提供给在队列中等待的呼叫者。
+Music on Hold: 选择等待时播放的音乐列表。
+步骤 2: 添加座席到队列
+静态座席:
+在 Static Agents 部分，输入座席的分机号码。例如，输入 1001,0 表示座席分机为1001，优先级为0。
+动态座席:
+座席可以通过拨打特定的代码加入队列。例如，座席可以拨打 *45 加入队列或使用其他预设的动态加入代码。
+步骤 3: 设置来电路由到队列
+进入来电路由模块:
+导航到 Connectivity -> Inbound Routes。
+选择或创建一个新的来电路由。
+设置目的地:
+在 Set Destination 部分，选择 Queues，然后选择之前创建的队列，例如 600 - SupportQueue。
+步骤 4: 测试和优化
+测试呼叫队列:
+从外部电话拨打进入线路，测试呼叫是否能正确进入队列，并测试各个座席的振铃策略。
+优化配置:
+根据实际需求和反馈，调整呼叫策略、座席配置和等待提示音等设置，以提高客户服务的效率和体验。
+重置Polycom电话密码
+开机按住cancel知道出现7秒倒计时同时按住1,3,5
+然后用mac地址作为密码，正确输入方式
+输入设备的 MAC ID 作为密码 （例如 0004f28619dc）。
+按与模式或（编码）相对应的第二个软键将其更改为 A->abc 或 a->abc。
+然后（例如）要选择字母 F， 请按 3 键三次。
